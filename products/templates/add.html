@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+{% load static %}
+{% block content %}
+{%if add_message%}
+ <div class="ui success message">
+  <i class="close icon"></i>
+  <div class="header">
+      {{add_message}}
+  </div>
+
+</div>
+{%endif%}
+<form method="post" class="ui form">
+    {%csrf_token%}
+    {{form}}
+    <button type="submit" class="ui positive button hi">add sales data</button>
+</form>
+
+      {% endblock content %}

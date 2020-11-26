@@ -1,0 +1,48 @@
+{%url 'login' as path_to_login%}
+{%url 'logout' as path_to_logout%}
+{%url 'signup' as path_to_signup%}
+{%url 'home' as  path_to_performance%}
+{%url 'add_purchase' as path_to_add_purchase%}
+{%url 'upload_file_view' as path_to_upload_file_view%}
+{%url 'customer_corr' as path_to_customer_corr%}
+{%url 'sales_dist' as path_to_sales_dist%}
+{%url 'fund' as path_to_fund%}
+
+
+
+<div class="ui secondary pointing menu">
+  <a  href={{path_to_fund}} class="{%if request.path == path_to_fund%}active{%endif%} item">
+ home
+  </a>
+    {%if request.user.is_authenticated %}
+    <a  href={{path_to_performance}} class="{%if request.path == path_to_performance%}active{%endif%} item">
+    performance
+    </a>
+  <a  href={{path_to_add_purchase}} class="item {% if request.path == path_to_add_purchase %}active{% endif %}">
+    add records
+  </a>
+  <a  href={{path_to_upload_file_view}} class="item {% if request.path == path_to_upload_file_view %}active{% endif %}">
+    upload data
+  </a>
+    <a  href={{path_to_customer_corr}} class="item {% if request.path == path_to_customer_corr %}active{% endif %}">
+customer
+</a>
+         <a  href={{path_to_sales_dist}} class="item {% if request.path == path_to_sales_dist %}active{% endif %}">
+sales
+</a>
+<div class="right menu">
+    <a class="ui item" href="{{path_to_logout}}">
+      Logout
+    </a>
+  </div>
+    {%else%}
+      <div class="right menu">
+    <a class="ui item" href="{{path_to_login}}">
+      Login
+    </a>
+          <a class="ui item" href="{{path_to_signup}}">
+      sign up
+    </a>
+  </div>
+{%endif%}
+</div>

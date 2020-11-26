@@ -1,0 +1,81 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<div class="ui modal my">
+    <div class="header"><h1>price data</h1></div>
+  <div class="ui container">
+    <ul>
+      <li><strong>count:</strong> {{price.count}}</li>
+      <li><strong>std:</strong> {{price.std|floatformat}}</li>
+      <li><strong>mean:</strong>{{price.mean|floatformat}}</li>
+      <li><strong>median:</strong> {{price.median}}</li>
+      <li><strong>max:</strong> {{price.max}}</li>
+      <li><strong>min:</strong> {{price.min}}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="block-center">
+{% if error_message%}
+  <div class="ui negative message">
+      <i class="close icon"></i>
+      <div class="header">
+          {{error_message}}
+      </div>
+  </div>
+{% endif %}
+
+
+  {%if request.POST%}
+     {%if graph %}
+        <img src="data:image/png;base64, {{graph| safe}}">
+     {%endif%}
+  {%endif%}
+
+      <!-- {{products|safe}}-->
+<form class="ui form" method="post">
+  {%csrf_token%}
+  <div class="field">
+      <label>choose type of chart</label>
+      <div class="ui selection dropdown">
+          <input type="hidden" name="sales">
+          <i class="dropdown icon"></i>
+          <div class="default text">---</div>
+          <div class="menu">
+              <div class="item" value="bar">bar plot </div>
+              <div class="item" value="line">line plot </div>
+              <div class="item" value="count">count plot </div>
+          </div>
+      </div>
+  </div>
+
+
+
+  <div class="field">
+      <label>select date</label>
+      <div class="two fields">
+        <div class="field">
+          <input type="date" name="date_from" placeholder="Date from">
+        </div>
+        <div class="field">
+          <input type="date" name="date_to" placeholder="Date_to">
+        </div>
+      </div>
+  </div>
+  <button class="ui  primary button" type="submit">Submit</button>
+</form>
+<button class="ui secondary button"  id="modal-btn">See summary</button>
+    <br>
+    <a href="{%url 'add_purchase'%}"><button class="ui positive button">add recoder</button></a>
+</div>
+
+
+
+      <!--{{purchase|safe}}-->
+
+
+      {% endblock content %}
+
+
+
